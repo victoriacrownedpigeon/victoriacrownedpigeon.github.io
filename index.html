@@ -5,10 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Larisa's Private Porn Collection</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="/favicons/fav0.png" id="icon"/>  
+<script>
+function iconChange() {
+setTimeout(function(){ document.getElementById("icon").href = "favicons/fav0.png";}, 250);
+setTimeout(function(){ document.getElementById("icon").href = "favicons/fav1.png";}, 500);
+setTimeout(function(){ document.getElementById("icon").href = "favicons/fav2.png";}, 750);
+setTimeout(function(){ document.getElementById("icon").href = "favicons/fav3.png";}, 1000); 
+}
+window.onload = function() {
+setInterval(function() {
+iconChange();
+}, 100);
+};
+</script>
 </head>
+
 <body>
-<p>Write <a target="_blank" href="https://google.com">me</a> any questions.</p>
-<h1>This is the most important text on this page!</h1>
-<p>This is just a simple paragraph</p>
+    
+
+<p class="intro">
+    VCP inc. WHQ's official website powered by Firefox
+<br>Larisa builds Victoria, the largest radio-station in the nation. "One nation, one station."
+<br><audio controls src="music/TheFatRat - BobGmbH Impossible Piano Remix LOOP.mp3"></audio> <br><a target="_blank" href="https://www.youtube.com/watch?v=P7nF7jXF-Jg">YouTube</a>
+<br>Copyright © 2025 VCP inc. All rights reserved.
+</p>
+
+    
+
+<p align="center"> 
+	<!--This draws the Canvas on the webpage -->
+      <canvas id="mycanvas"></canvas> 
+    </p>
+    <!-- Run all the JavaScript stuff -->
+ <!-- Include the processing.js library -->
+ <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ <script>
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400); 
+        frameRate(30);
+        
+        // ProgramCodeGoesHere
+        var xPositions = [];
+var yPositions = [];
+var speed = [];
+var colors = [];
+var numbers =[];
+
+for (var i = 0; i < 10; i ++) {
+    xPositions.push(random(0,400));
+    yPositions.push(0);
+    speed.push(random(2,4));
+    colors.push(color(random(0,255),random(0,255),random(0,255)));
+    numbers.push(floor(random(0,9)));
+}
+
+mouseClicked = function() {
+    xPositions.push(mouseX);
+    yPositions.push(mouseY);
+    speed.push(random(2,4));
+    colors.push(color(random(0,255),random(0,255),random(0,255)));
+    numbers.push(floor(random(0,9)));
+};
+
+draw = function() {
+    background(169, 169, 169);
+    for (var i = 0; i < xPositions.length; i++) {
+        noStroke();
+        fill(colors[i]);
+        ellipse(xPositions[i], yPositions[i], 25, 25);
+        fill(204, 247, 255);
+        textSize(20);
+        text(numbers[i],xPositions[i]-5, yPositions[i]+7);
+        yPositions[i] += speed[i];
+        if (yPositions[i] > 400) {
+            yPositions[i] = 0;
+        }
+    }
+};
+
+    }};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc); 
+ </script>
+
 </body>
 </html>
