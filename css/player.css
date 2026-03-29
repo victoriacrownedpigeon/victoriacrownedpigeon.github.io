@@ -1,0 +1,111 @@
+/* --- ANIMATION STATES --- */
+.pos-spawn-right { transform: translateX(400px) !important; opacity: 0 !important; transition: none !important; }
+.pos-spawn-left  { transform: translateX(-160px) !important; opacity: 0 !important; transition: none !important; }
+
+/* --- COVER ELEMENTS --- */
+.shield { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    z-index: 1000; background: transparent; pointer-events: none; 
+}
+
+.cover-art { 
+    width: 100%; height: 100%; background-size: cover; background-position: center; 
+    pointer-events: none; transition: background-image 0.2s ease-in-out; 
+}
+
+/* --- MAIN PLAYER BODY --- */
+#player { 
+    width: 320px; background: #c8c8c8; position: absolute; top: 50px; left: 50px; 
+    user-select: none; font-family: Tahoma, sans-serif; font-size: 11px; 
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3); z-index: 500; 
+}
+
+.player-middle-row { position: relative; height: 80px; width: 320px; }
+
+#cover-stage { 
+    width: 320px; height: 80px; position: relative; overflow: hidden; 
+    background: #525252; z-index: 10; 
+}
+
+/* --- CONTROLS --- */
+#controls { position: absolute; top: 0; left: 0; width: 320px; height: 80px; pointer-events: none; z-index: 1500; }
+#controls button { 
+    position: absolute; bottom: 0; width: 20px; height: 20px; border: none; 
+    cursor: pointer; padding: 0; outline: none; pointer-events: auto; 
+    display: flex; align-items: center; justify-content: center; background: transparent !important; 
+}
+
+#btn-loop-one { left: 0px; }
+#btn-loop-all { left: 160px; }
+#btn-shuffle  { left: 240px; }
+
+#controls button svg { width: 14px; height: 14px; fill: #ccc; filter: drop-shadow(0 0 2px rgba(0,0,0,1)); transition: fill 0.2s; }
+#controls button.active svg { fill: #44b838 !important; filter: drop-shadow(0 0 3px rgba(68, 184, 56, 0.8)) !important; }
+
+/* --- SQUARE SLIDERS --- */
+.volume-zone { height: 20px; width: 320px; background: #767676; display: flex; align-items: center; overflow: hidden; }
+.control-half { width: 160px; height: 20px; display: flex; align-items: center; position: relative; }
+
+#volume-slider, #speed-slider { 
+    -webkit-appearance: none; 
+    appearance: none; 
+    width: 100%; 
+    height: 20px; 
+    background: transparent; 
+    outline: none; 
+    cursor: pointer; 
+    margin: 0; 
+    padding: 0;
+    z-index: 2; 
+}
+
+/* Chrome/Safari/Edge Thumb */
+#volume-slider::-webkit-slider-thumb, #speed-slider::-webkit-slider-thumb { 
+    -webkit-appearance: none; 
+    width: 20px; 
+    height: 20px; 
+    background: #44b838; 
+    border-radius: 0; 
+    border: none;
+}
+
+/* Firefox Thumb Fix */
+#volume-slider::-moz-range-thumb, #speed-slider::-moz-range-thumb { 
+    width: 20px; 
+    height: 20px; 
+    background: #44b838; 
+    border-radius: 0; 
+    border: none;
+}
+
+/* Firefox Track Fix */
+#volume-slider::-moz-range-track, #speed-slider::-moz-range-track {
+    background: transparent;
+    border: none;
+}
+
+.speed-marker { 
+    position: absolute; left: 44.8%; top: 50%; transform: translate(-50%, -50%); 
+    color: #a9a9a9; font-weight: bold; font-size: 10px; z-index: 1; pointer-events: none; 
+}
+
+/* --- COVER POSITIONS --- */
+.cover-item { 
+    position: absolute; width: 80px; height: 80px; top: 0; 
+    transition: transform 0.8s cubic-bezier(0.9, 0.9, 0.9, 0.9), opacity 0.3s linear; cursor: pointer; 
+}
+
+.pos-hidden-left  { transform: translateX(-160px); opacity: 1; z-index: 10; }
+.pos-prev         { transform: translateX(0px);   opacity: 1; z-index: 20; }  
+.pos-active       { transform: translateX(80px);  opacity: 1; z-index: 30; }  
+.pos-next-1       { transform: translateX(160px); opacity: 1; z-index: 40; }  
+.pos-next-2       { transform: translateX(240px); opacity: 1; z-index: 50; }  
+.pos-hidden-right { transform: translateX(400px); opacity: 1; z-index: 60; } 
+
+/* --- PLAYLIST --- */
+#playlist-container { height: 80px; width: 320px; overflow: hidden; background: #a9a9a9; }
+#playlist { list-style: none; margin: 0; padding: 0; }
+#playlist li { height: 20px; line-height: 20px; font-size: 11px; cursor: pointer; overflow: hidden; width: 320px; color: #525252; }
+#playlist li.active { background: linear-gradient(to right, #44b838 var(--prog, 0%), #525252 var(--prog, 0%)); color: #c8c8c8; }
+.scroll-inner { display: inline-block; white-space: nowrap; }
+.scroll-inner span { padding-right: 320px; display: inline-block; padding-left: 5px; }

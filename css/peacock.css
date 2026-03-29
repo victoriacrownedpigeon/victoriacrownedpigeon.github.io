@@ -1,0 +1,87 @@
+body {
+  /* Layout & Reset */
+  background-color: #aa9681;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  margin: 0;
+  height: 100vh;
+  background-image: 
+    url('../images/twycrosszoo_org_low-res.webp'),
+    linear-gradient(#aa9681, #7d6b5a);
+  transition: background-image 0.8s ease-in-out;
+}
+
+body.bg-loaded {
+  /* Add the high-res to the top of the stack */
+  background-image: 
+    url('../images/twycrosszoo_org.webp'),
+    url('../images/twycrosszoo_org_low-res.webp'),
+    linear-gradient(#aa9681, #7d6b5a);
+}
+
+body::after {
+    content: ""; /* This is mandatory! Without this, the 'ghost' doesn't exist */
+    position: fixed; /* Fixes it to the screen so it doesn't scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* The actual vignette effect */
+    background: radial-gradient(circle, transparent 40%, rgba(45, 45, 45, 0.4) 100%);
+    
+    pointer-events: none; /* VERY IMPORTANT: Let's you click buttons through the vignette */
+    z-index: 5; /* Puts it above the bird image but below your player (which is 1000) */
+}
+
+#player {
+  position: fixed;
+  top: clamp(40px, 4vh, 40px);
+  right: clamp(60px, 4vw, 40px);
+  width: 320px;
+  border-radius: 3px; /* Your preferred radius */
+  
+  /* ADD THIS LINE */
+  overflow: hidden; 
+  
+  /* Ensure it stays on top */
+  z-index: 1000;
+  left: auto;
+  bottom: auto;
+  touch-action: none;
+}
+
+.quote-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    z-index: 10; /* Keeps it behind the player but above the bird */
+    pointer-events: none; /* Allows you to click "through" the text */
+}
+
+.quote-text {
+    font-family: 'Tahoma', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: white;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Critical for visibility */
+}
+
+.quote-author {
+    font-family: 'Tahoma', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
