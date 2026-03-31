@@ -1,0 +1,9 @@
+One last tip for your "Junk" site:
+
+Since you are using GitHub Pages, remember that every time you change a line of code in your index.html on your computer, you just need these three "magic words" in your terminal to see the changes live:
+
+    git add .
+
+    git commit -m "update"
+
+    git push origin main
