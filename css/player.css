@@ -11,7 +11,32 @@
   transition: none !important;
 }
 
-/* --- COVER ELEMENTS --- */
+/* --- SHARED PLAYER CONTAINERS --- */
+#master-container {
+  position: absolute;
+  top: 50px; 
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 0; 
+  z-index: 1000;
+  width: 320px;
+}
+
+#player, #player-2 {
+  width: 320px;
+  height: 260px;
+  background: #c8c8c8;
+  position: relative !important; 
+  top: 0 !important;
+  left: 0 !important;
+  margin: 0;
+  display: block;
+  user-select: none;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- COVER ELEMENTS & STAGE --- */
 .shield {
   position: absolute;
   top: 0;
@@ -32,28 +57,13 @@
   transition: background-image 0.2s ease-in-out;
 }
 
-/* --- MAIN PLAYER BODY --- */
-#player {
-  width: 320px;
-  height: 260px; /* Increased by 80px */
-  background: #c8c8c8;
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  user-select: none;
-  font-family: Tahoma, sans-serif;
-  font-size: 12px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-  z-index: 500;
-}
-
 .player-middle-row {
   position: relative;
   height: 80px;
   width: 320px;
 }
 
-#cover-stage {
+#cover-stage, #cover-stage-2 {
   width: 320px;
   height: 80px;
   position: relative;
@@ -63,7 +73,7 @@
 }
 
 /* --- CONTROLS --- */
-#controls {
+#controls, #controls-2 {
   position: absolute;
   top: 0;
   left: 0;
@@ -73,7 +83,7 @@
   z-index: 1500;
 }
 
-#controls button {
+#controls button, #controls-2 button {
   position: absolute;
   bottom: 0;
   width: 20px;
@@ -89,11 +99,12 @@
   background: transparent !important;
 }
 
-#btn-loop-one { left: 0px; }
-#btn-loop-all { left: 160px; }
-#btn-shuffle  { left: 240px; }
+/* Button Positioning */
+#btn-loop-one, #btn-loop-one-2 { left: 0px; }
+#btn-loop-all, #btn-loop-all-2 { left: 160px; }
+#btn-shuffle, #btn-shuffle-2  { left: 240px; }
 
-#controls button svg {
+#controls button svg, #controls-2 button svg {
   width: 14px;
   height: 14px;
   fill: #ccc;
@@ -101,7 +112,7 @@
   transition: fill 0.2s;
 }
 
-#controls button.active svg {
+#controls button.active svg, #controls-2 button.active svg {
   fill: #44b838 !important;
   filter: drop-shadow(0 0 3px rgba(68, 184, 56, 0.8)) !important;
 }
@@ -126,7 +137,7 @@
   flex: 1;
 }
 
-.speed-marker, #track-counter {
+.speed-marker, #track-counter, #track-counter-2 {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -139,10 +150,10 @@
 }
 
 .speed-marker { left: 43.75%; z-index: 10; }
-#track-counter { left: 50%; }
+#track-counter, #track-counter-2 { left: 50%; }
 
-/* --- SLIDERS (SQUARE KNOBS) --- */
-#volume-slider, #speed-slider {
+/* --- SLIDERS --- */
+input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -155,9 +166,7 @@
   z-index: 2;
 }
 
-/* Chrome/Safari Square */
-#volume-slider::-webkit-slider-thumb, 
-#speed-slider::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
@@ -166,9 +175,7 @@
   border-radius: 0; 
 }
 
-/* Firefox Square */
-#volume-slider::-moz-range-thumb, 
-#speed-slider::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   background: #44b838;
@@ -182,8 +189,7 @@
   width: 80px;
   height: 80px;
   top: 0;
-  /* Match the 0.5s speed and use the same smooth easing */
-  transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95), opacity 0.3s linear;
+  transition: transform 1.2s cubic-bezier(0.5, 0.5, 0.5, 0.5), opacity 0.3s linear;
   cursor: pointer;
 }
 
@@ -195,21 +201,21 @@
 .pos-hidden-right { transform: translateX(400px);  opacity: 1; z-index: 60; }
 
 /* --- PLAYLIST --- */
-#playlist-container {
-  height: 160px; /* 4 songs * 40px = 160px total height */
+#playlist-container, #playlist-container-2 {
+  height: 160px; 
   width: 320px;
   overflow: hidden;
   background: #a9a9a9;
 }
 
-#playlist {
+#playlist, #playlist-2 {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-#playlist li {
-  height: 40px; /* Increased to fit both lines */
+#playlist li, #playlist-2 li {
+  height: 40px; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -217,11 +223,14 @@
   width: 320px;
   color: #525252;
   overflow: hidden;
+  /* Instant snap when switching tracks */
+  transition: none !important; 
 }
 
-#playlist li.active {
+#playlist li.active, #playlist-2 li.active {
   background: linear-gradient(to right, #44b838 var(--prog, 0%), #525252 var(--prog, 0%));
   color: #c8c8c8;
+  transition: none !important; 
 }
 
 .scroll-wrapper {
@@ -231,9 +240,9 @@
 }
 
 .scroll-inner {
-    display: inline-block;
-    white-space: nowrap;
-    will-change: transform; /* Helps the hardware pre-allocate memory for the movement */
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
 }
 
 .scroll-inner span {
@@ -252,10 +261,9 @@
   line-height: 12px;
   opacity: 0.6;
   font-family: Tahoma, sans-serif;
-  
 }
 
-#playlist li.active .meta-line {
+#playlist li.active .meta-line, #playlist-2 li.active .meta-line {
   color: #eee;
   opacity: 1;
 }
