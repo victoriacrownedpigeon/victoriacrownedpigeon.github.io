@@ -1,12 +1,6 @@
 /* --- ANIMATION STATES --- */
-.pos-spawn-right {
-  transform: translateX(400px) !important;
-  opacity: 0 !important;
-  transition: none !important;
-}
-
-.pos-spawn-left {
-  transform: translateX(-160px) !important;
+/* Hide the "teleporting" covers so they don't fly across the screen */
+.pos-spawn-right, .pos-spawn-left {
   opacity: 0 !important;
   transition: none !important;
 }
@@ -64,12 +58,23 @@
 }
 
 #cover-stage, #cover-stage-2 {
-  width: 320px;
-  height: 80px;
-  position: relative;
-  overflow: hidden;
-  background: #525252;
-  z-index: 10;
+    overflow: hidden;
+    position: relative;
+    width: 320px;
+    height: 80px;
+    background: #525252;
+    pointer-events: auto !important;
+}
+
+/* This is the actual moving 'film' */
+.cover-film-strip {
+    display: flex;
+    flex-wrap: nowrap;
+    position: absolute;
+    top: 0;
+    left: -80px; /* THIS IS THE MOST IMPORTANT LINE */
+    height: 80px;
+    width: 560px; 
 }
 
 /* --- CONTROLS --- */
@@ -81,6 +86,7 @@
   height: 80px;
   pointer-events: none;
   z-index: 1500;
+  pointer-events: none; /* Already there, but let's be sure */
 }
 
 #controls button, #controls-2 button {
@@ -97,6 +103,7 @@
   align-items: center;
   justify-content: center;
   background: transparent !important;
+  pointer-events: auto; /* Only the buttons themselves catch clicks */
 }
 
 /* Button Positioning */
@@ -184,21 +191,39 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* --- COVER POSITIONS --- */
+/* --- COVER POSITIONS --- */
 .cover-item {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 0;
-  transition: transform 1.2s cubic-bezier(0.5, 0.5, 0.5, 0.5), opacity 0.3s linear;
-  cursor: pointer;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0; 
+    position: relative !important; 
+    /* REMOVE ALL old transform: translateX(...) here */
+    transform: none !important;
+    display: block;
 }
 
-.pos-hidden-left  { transform: translateX(-160px); opacity: 1; z-index: 10; }
-.pos-prev         { transform: translateX(0px);    opacity: 1; z-index: 20; }
-.pos-active       { transform: translateX(80px);   opacity: 1; z-index: 30; }
-.pos-next-1       { transform: translateX(160px);  opacity: 1; z-index: 40; }
-.pos-next-2       { transform: translateX(240px);  opacity: 1; z-index: 50; }
-.pos-hidden-right { transform: translateX(400px);  opacity: 1; z-index: 60; }
+/* --- CLEANUP: Disable old position logic --- */
+.pos-prev, 
+.pos-active, 
+.pos-next-1, 
+.pos-next-2, 
+.pos-hidden-left, 
+.pos-hidden-right, 
+.pos-spawn-left, 
+.pos-spawn-right {
+    display: none !important;
+    transform: none !important;
+    position: relative !important;
+}
+/* Utilities */
+.no-transition {
+  transition: none !important;
+}
+
+.pos-spawn-right, .pos-spawn-left {
+  opacity: 0 !important;
+  transition: none !important;
+}
 
 /* --- PLAYLIST --- */
 #playlist-container, #playlist-container-2 {
@@ -209,9 +234,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 #playlist, #playlist-2 {
-  list-style: none;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
+  list-style: none;
+  /* Remove will-change if it causes flicker, keep it for performance */
+  will-change: transform; 
+  /* We will set the transition via JavaScript dynamically */
 }
 
 #playlist li, #playlist-2 li {
@@ -223,8 +253,7 @@ input[type="range"]::-moz-range-thumb {
   width: 320px;
   color: #525252;
   overflow: hidden;
-  /* Instant snap when switching tracks */
-  transition: none !important; 
+  /* REMOVE transition: none !important; from here */
 }
 
 #playlist li.active, #playlist-2 li.active {
