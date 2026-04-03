@@ -5,18 +5,6 @@
   transition: none !important;
 }
 
-/* --- SHARED PLAYER CONTAINERS --- */
-#master-container {
-  position: absolute;
-  top: 50px; 
-  left: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 0; 
-  z-index: 1000;
-  width: 320px;
-}
-
 #player, #player-2 {
   width: 320px;
   height: 260px;
@@ -231,6 +219,19 @@ input[type="range"]::-moz-range-thumb {
   width: 320px;
   overflow: hidden;
   background: #a9a9a9;
+  display: flex;            /* Added */
+  flex-direction: column;   /* Added */
+}
+
+.folder-selection-panel {
+    width: 320px;
+    height: 24px;
+    background: #767676; /* Slightly darker than playlist background */
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-shrink: 0;      /* Prevents the bar from squishing */
 }
 
 #playlist, #playlist-2 {
@@ -242,6 +243,38 @@ input[type="range"]::-moz-range-thumb {
   /* Remove will-change if it causes flicker, keep it for performance */
   will-change: transform; 
   /* We will set the transition via JavaScript dynamically */
+}
+
+.folder-btn {
+    flex: 1;              /* Each button takes equal width (1/5th of 320px) */
+    height: 100%;         /* Forces background to fill the full 24px height */
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    
+    /* Text Styling */
+    color: #cfd4ce;
+    font-family: monospace;
+    font-size: 11px;      /* Fits 24px height perfectly */
+    font-weight: bold;
+    
+    /* Center the text perfectly without padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: all 0.15s ease;
+}
+
+.folder-btn:hover {
+    background: #a9a9a9;        /* Darker than the #525252 panel */
+    color: #525252;             /* Brighter text */
+}
+
+.folder-btn.active {
+    background: #a9a9a9;        /* Deepest dark background */
+    color: #525252;             /* Your signature green */
 }
 
 #playlist li, #playlist-2 li {

@@ -8,31 +8,26 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-image: 
-    url('../images/twycrosszoo_org_low-res.webp'),
+    url('../images/backgrounds/twycrosszoo_org_low-res.webp'),
     linear-gradient(#aa9681, #7d6b5a);
   transition: background-image 0.5s ease-in-out;
 }
 
 body.bg-loaded {
   background-image: 
-    url('../images/twycrosszoo_org.webp'),
-    url('../images/twycrosszoo_org_low-res.webp'),
+    url('../images/backgrounds/twycrosszoo_org.webp'),
+    url('../images/backgrounds/twycrosszoo_org_low-res.webp'),
     linear-gradient(#aa9681, #7d6b5a);
 }
 
-#player {
-  position: fixed;
-  top: clamp(40px, 4vh, 40px);
-  right: clamp(60px, 4vw, 40px);
-  width: 320px;
-  border-radius: 3px; /* Your preferred radius */
-  /* ADD THIS LINE */
-  overflow: hidden; 
-  /* Ensure it stays on top */
+#master-container {
+  position: absolute;
+  top: 20px;            /* Moved it up from 50px to save space */
+  left: 50%;            /* Center it */
+  display: flex;
+  flex-direction: column;
   z-index: 1000;
-  left: auto;
-  bottom: auto;
-  touch-action: none;
+  width: 320px;
 }
 
 .quote-container {

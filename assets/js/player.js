@@ -1,7 +1,7 @@
 const ITEM_H = 40;  // Critical: Matches the 40px CSS row height
 const SLOT_INDEX = 1;  
 const PX_PER_SONG = 5; 
-const ROZETKA_DATA = "images/rozetka-gemini.svg";   
+const ROZETKA_DATA = "assets/images/ui/rozetka-gemini.svg"; 
 
 const playlist = document.getElementById('playlist'); 
 const audio = document.getElementById('audio'); 

@@ -1,25 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Larisa's Private Porn Collection</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link id="icon" rel="icon" type="image/png" href="/favicons/fav0.png">
-    <script src="/js/main.js" defer></script>
+    <title>Victoria</title>
+
+    <link rel="preload" as="image" href="assets/images/backgrounds/twycrosszoo_org_low-res.webp" type="image/webp">
+    <link rel="preload" as="image" href="assets/images/backgrounds/twycrosszoo_org.webp" type="image/webp">
+
+    <link rel="stylesheet" href="assets/css/player.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <link id="icon" rel="icon" type="image/png" href="assets/images/favicons/fav0.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/player.js" defer></script>
 </head>
-
 <body>
-    <p class="intro">
-    VCP inc. WHQ's official website powered by Firefox
-<br>Larisa builds Victoria, the largest radio-station in the nation. "One nation, one station."
-<br><audio controls src="music/TheFatRat - BobGmbH Impossible Piano Remix LOOP.opus"></audio> <br><a target="_blank" href="https://www.youtube.com/watch?v=P7nF7jXF-Jg">YouTube</a>
-<br>Copyright © 2025 VCP inc. All rights reserved.
-</p>
+    <header class="quote-container">
+    <p class="quote-text">
+        "Instead of seeing the high-res image slowly load from top to bottom (which looks 'cheap'), it stays hidden until it's 100% ready, then appears all at once with a professional fade."
+    </p>
+    <cite class="quote-author">- Gemini</cite>
+</header>
 
-<canvas id="mycanvas" width="400" height="400"></canvas>
-<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
-<script src="js/main.js" defer></script>
+<div id="master-container">
 
+    <div id="player" class="paused">
+        <div class="player-middle-row">
+            <div id="controls">
+                <button id="btn-loop-one" title="Loop One">
+                    <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zm-4-2V9h-1.1l-1.9 1v1h1.5v3H13z"/></svg>
+                </button>
+                <button id="btn-loop-all" title="Loop All">
+                    <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                </button>
+                <button id="btn-shuffle" title="Shuffle">
+                    <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+                </button>
+            </div>
+
+            <div id="cover-stage">
+                <div class="cover-film-strip" id="film-strip">
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="volume-zone">
+            <div class="control-half">
+                <input type="range" id="speed-slider" min="0.5" max="4.0" step="0.5" value="1.0">
+                <span class="speed-marker">2</span>
+            </div>
+            <div class="control-half">
+                <input type="range" id="volume-slider" min="0" max="1.0" step="0.001" value="0.143">
+            </div>
+            <div id="track-counter">0</div>
+        </div>
+
+        <audio id="audio" crossorigin="anonymous"></audio>
+
+        <div id="playlist-container">
+            <div class="folder-selection-panel">
+        <button class="folder-btn active" data-folder="chiptunes">chiptunes</button>
+        <button class="folder-btn" data-folder="comedy">Comedy</button>
+        <button class="folder-btn" data-folder="house">House</button>
+        <button class="folder-btn" data-folder="techno">Techno</button>
+        <button class="folder-btn" data-folder="beds">beds</button>
+            </div>
+
+            <ul id="playlist">
+                <li data-id="assets/audio/music/Adrien Kepler - White Clouds.mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>Adrien Kepler - White Clouds</span><span>Adrien Kepler - White Clouds</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+                <li data-id="assets/audio/music/D.Kay & Rawfull - Directions.mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>D.Kay & Rawfull - Directions</span><span>D.Kay & Rawfull - Directions</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+                <li data-id="assets/audio/music/Hans Zimmer - Time (Pen Perry Remix).mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>Hans Zimmer - Time (Pen Perry Remix)</span><span>Hans Zimmer - Time (Pen Perry Remix)</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+                <li data-id="assets/audio/music/Kalush feat. Tember Blanche - Kaluski vechornytsi.mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>Kalush feat. Tember Blanche - Kaluski vechornytsi</span><span>Kalush feat. Tember Blanche - Kaluski vechornytsi</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+                <li data-id="assets/audio/music/Pete Tong & Chris Cox - Ku Da Ta.mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>Pete Tong & Chris Cox - Ku Da Ta</span><span>Pete Tong & Chris Cox - Ku Da Ta</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+                <li data-id="assets/audio/music/Roundheads - Crockett's Theme.mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>Roundheads - Crockett's Theme</span><span>Roundheads - Crockett's Theme</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+                <li data-id="assets/audio/music/TheFatRat - BobGmbH Impossible Piano Remix LOOP.opus"><div class="scroll-wrapper"><div class="scroll-inner"><span>TheFatRat - BobGmbH Impossible Piano Remix LOOP</span><span>TheFatRat - BobGmbH Impossible Piano Remix LOOP</span></div></div><div class="meta-line">48kHz | OPUS</div></li>
+                <li data-id="assets/audio/music/Timo Maas - First Day (Fleps and Pierro Remix).mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>Timo Maas - First Day (Fleps and Pierro Remix)</span><span>Timo Maas - First Day (Fleps and Pierro Remix)</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+                <li data-id="assets/audio/music/Untitled Session 1_mixdown.mp3"><div class="scroll-wrapper"><div class="scroll-inner"><span>Untitled Session 1_mixdown</span><span>Untitled Session 1_mixdown</span></div></div><div class="meta-line">44kHz | MP3</div></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="player-2" class="paused">
+        <div class="player-middle-row">
+            <div id="controls-2" class="controls-shared">
+                <button id="btn-loop-one-2" title="Loop One"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zm-4-2V9h-1.1l-1.9 1v1h1.5v3H13z"/></svg></button>
+                <button id="btn-loop-all-2" title="Loop All"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
+                <button id="btn-shuffle-2" title="Shuffle"><svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg></button>
+            </div>
+            
+            <div id="cover-stage-2">
+                <div class="cover-film-strip" id="film-strip-2">
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                    <div class="cover-item"><div class="cover-art"></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="volume-zone">
+            <div class="control-half">
+                <input type="range" id="speed-slider-2" min="0.5" max="4.0" step="0.5" value="1.0">
+                <span class="speed-marker">2</span>
+            </div>
+            <div class="control-half">
+                <input type="range" id="volume-slider-2" min="0" max="1.0" step="0.001" value="0.143">
+            </div>
+            <div id="track-counter-2">0</div>
+        </div>
+        <audio id="audio-2" crossorigin="anonymous"></audio>
+        <div id="playlist-container-2">
+            <ul id="playlist-2">
+                <li data-id="assets/audio/podcasts/Car Ding - Persnickety Roycipient.mp3">
+                    <div class="scroll-wrapper"><div class="scroll-inner"><span>Car Ding - Persnickety Roycipient</span><span>Car Ding - Persnickety Roycipient</span></div></div>
+                    <div class="meta-line">44kHz | MP3</div>
+                </li>
+                <li data-id="assets/audio/podcasts/Grocery Store Complainer - Peacock Meat.mp3">
+                    <div class="scroll-wrapper"><div class="scroll-inner"><span>Grocery Store Complainer - Peacock Meat</span><span>Grocery Store Complainer - Peacock Meat</span></div></div>
+                    <div class="meta-line">44kHz | MP3</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="assets/js/player.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
